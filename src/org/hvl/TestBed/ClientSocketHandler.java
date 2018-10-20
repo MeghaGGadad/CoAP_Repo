@@ -152,12 +152,7 @@ public class ClientSocketHandler implements Runnable {
 		}
 	}
 
-	// PUT data to file ServerIndex.htm
-	/**private static int putData(String putDataFromClient, String file)
-			throws IOException {
-
-		return writeHtmlFile(putDataFromClient, file);
-	}**/
+	
 
 	private static String getData(String file) {
 
@@ -183,20 +178,7 @@ public class ClientSocketHandler implements Runnable {
 		return responseToClient;
 	}
 
-	// Write the data to server - Helper method for putData method
-	/**private static int writeHtmlFile(String putDataFromClient, String file) {
-
-		File myFile = new File(file);
-		BufferedWriter writer;
-		try {
-			writer = new BufferedWriter(new FileWriter(myFile));
-			writer.write(putDataFromClient);
-			writer.close();
-			return 200;
-		} catch (IOException e) {
-			return 304;
-		}
-	}**/
+	
 
 	// TimeStamp
 	private static String getTimeStamp() {

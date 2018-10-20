@@ -26,17 +26,7 @@ public static void main(String[] args) throws IOException {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} /**else if ("PUT".equals(command)) {
-			try {
-				Client.putMethod(host, port, path);
-			} catch (UnknownHostException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}**/
-		//}
+		} 
 	 else{
 			System.out.println("Check the HTTP command! It should be GET");
 			return;
