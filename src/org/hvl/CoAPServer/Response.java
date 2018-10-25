@@ -3,7 +3,7 @@ package org.hvl.CoAPServer;
 
 
 import org.hvl.CoAP.CoAPCodeRegistries;
-import org.hvl.CoAP.HandelMessage;
+import org.hvl.CoAP.HandleMessage;
 import org.hvl.CoAP.MessageFormat;
 import org.hvl.CoAPClient.Request;
 
@@ -73,7 +73,7 @@ public class Response extends MessageFormat {
 	}
 	
 	@Override
-	public void handleBy(HandelMessage handler) {
+	public void handleBy(HandleMessage handler) {
 		handler.HandelResponse(this);
 	}
 	

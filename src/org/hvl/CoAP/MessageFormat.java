@@ -499,7 +499,7 @@ public class MessageFormat {
 		return isAcknowledgement() || isReset();
 	}
 	
-	public void handleBy(HandelMessage handler) {
+	public void handleBy(HandleMessage handler) {
 		// TODO Auto-generated method stub
 		
 	}
