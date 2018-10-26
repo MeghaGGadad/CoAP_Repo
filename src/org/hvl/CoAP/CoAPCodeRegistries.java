@@ -2,7 +2,7 @@ package org.hvl.CoAP;
 
 
 
-/**This class defines 12.1.Code Registries
+/**This class defines 12.1.Coap Code Registries
  * 12.1.1. Method Codes
  * 12.1.2. Response Codes
  * @author MeghaGadad
@@ -89,10 +89,10 @@ public class CoAPCodeRegistries {
 			CON(0),
 			NON(1),ACK(2),RST(3);
 			
-			public final int value;
+			public final int val;
 			
 			Type(int value) {
-				this.value = value;
+				this.val = value;
 			}
 			
 			public static Type valueOf(int value) {
@@ -101,7 +101,7 @@ public class CoAPCodeRegistries {
 					case 1: return NON;
 					case 2: return ACK;
 					case 3: return RST;
-					default: throw new IllegalArgumentException("Unknown CoAP type "+value);
+					default: throw new IllegalArgumentException("Unknown Message Type "+value);
 				}
 		}
 
@@ -143,7 +143,7 @@ public class CoAPCodeRegistries {
 				case POST: return POSTRequest;
 				case PUT: return PUTRequest;
 				case DELETE: return DELETERequest;
-				default: throw new IllegalArgumentException("Unknwon CoAP request code "+val);
+				default: throw new IllegalArgumentException("Unknwon Request Method "+val);
 			}
 		}
 	}
@@ -234,7 +234,7 @@ public class CoAPCodeRegistries {
 						else if (val/32 == 4) return BAD_REQUEST;
 						else if (val/32 == 5) return INTERNAL_SERVER_ERROR;
 						
-						else throw new IllegalArgumentException("Unspecified response code "+val);
+						else throw new IllegalArgumentException("Unspecified Response Code "+val);
 				}
 			}
 			
@@ -317,11 +317,11 @@ public class CoAPCodeRegistries {
 						} else if (isResponse(code)) {
 							return String.format("Response Unknown[code %d]", code);
 						} else {
-							return String.format("Reserved for future use [code %d]", code);
+							return String.format("Reserved for Future Use [code %d]", code);
 						}
 						
 			 } else {
-						return String.format("Invalid Message code [code %d]", code);
+						return String.format("Invalid Message Code [code %d]", code);
 					}
 					
 		        }
