@@ -29,15 +29,12 @@ public class SimpleClient {
 			String payload = null;
 			boolean loop   = false;
 
-			
-		      
-			// display information  if no arguments specified
+		// display information  if no arguments specified
 			if (args.length == 0) {
 				printInfo();
 				return;
 			}
 
-			
 			int index = 0;
 			for (String arg : args) {
 				if (arg.startsWith("-")) {
@@ -84,19 +81,14 @@ public class SimpleClient {
 				System.err.println("Failed to parse URI: " + e.getMessage());
 				return;
 			}
-		    while(true){
-		    	
-		    
-			System.out.println("Request sent...");
+		    System.out.println("Request sent...");
 			request.setPayload(payload);
 		   // enable response queue in order to use blocking I/O
 			request.ResponseQueueEnable(true);
 			
 			request.send();
 			
-		    // loop for receiving multiple responses
-				
-				// receive response
+		    // loop for receiving multiple response 
 				
 				//Request request = newRequest(method);
 				
@@ -146,20 +138,9 @@ public class SimpleClient {
 					System.out.println("Request timed out (ms): " + elapsed);
 					//break;
 				}
-				try { //new
-			        Thread.sleep(10000); //new
-			       } catch (InterruptedException e) { //new
-			         e.printStackTrace();//new
-			       }
-			
+				
 		    }
-		    
-	    	}
-		
-    	
-					  
-		
-		/* If the user is not aware of what the arguments should pass
+	/* If the user is not aware of what the arguments should pass
 		 * 
 		 * 
 		 */
@@ -169,13 +150,14 @@ public class SimpleClient {
 			System.out.println("Usage: SimpleClient [-l] METHOD URI [PAYLOAD]");
 			System.out.println("  METHOD  : {GET, POST, PUT, DELETE}");
 			System.out.println("  URI     : The URI to the remote endpoint or resource");
-			System.out.println("  PAYLOAD : The data to send with the request");
+			System.out.println("  PAYLOAD : The data to send along with the request");
 			System.out.println("Options:");
 			System.out.println("  -l      : Wait for multiple responses");
 			System.out.println();
 			System.out.println("Examples:");
-			System.out.println("  SimpleClient GET coap://10.0.1.97:5683/temp");
-			System.out.println("  SimpleClient POST coap://example.com:5683/~sensors/readings.xml");
+			System.out.println(" SimpleClient GET coap://10.0.1.97:5683/temp");
+			System.out.println(" SimpleClient GET coap://[::1]/.well-known/core");			
+			System.out.println(" SimpleClient POST coap://example.com:5683/~sensors/readings.xml");
 		}
 
 		/* This method 
