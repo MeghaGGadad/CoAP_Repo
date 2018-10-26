@@ -89,7 +89,7 @@ public class CoAPCodeRegistries {
 			CON(0),
 			NON(1),ACK(2),RST(3);
 			
-			public final int val;
+			public int val;
 			
 			Type(int value) {
 				this.val = value;
