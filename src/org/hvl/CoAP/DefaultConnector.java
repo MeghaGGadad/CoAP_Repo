@@ -8,7 +8,7 @@ import org.hvl.CoAPClient.Request;
 import org.hvl.CoAPServer.Response;
 
 
-public class Communicator extends UpperLayer{
+public class DefaultConnector extends UpperLayer{
 	
 	// Constants ///////////////////////////////////////////////////////////////
 	
@@ -23,7 +23,7 @@ public class Communicator extends UpperLayer{
 		 * 
 		 * @param port The local UDP port to listen for incoming messages
 		 */	
-		public Communicator(int port, boolean daemon) throws SocketException {
+		public DefaultConnector(int port, boolean daemon) throws SocketException {
 			
 			
 		}
@@ -32,7 +32,7 @@ public class Communicator extends UpperLayer{
 		 * Constructor for a new Communicator
 		 * 
 		 */
-		public Communicator() throws SocketException {
+		public DefaultConnector() throws SocketException {
 			this(0, true);
 		}
 		
@@ -46,7 +46,7 @@ public class Communicator extends UpperLayer{
 		protected void doSendMessage(MessageFormat msg) throws IOException {
 
 			// delegate to first layer
-			sendMessageOverLowLayer(msg);
+			sendMessageOverLayer(msg);
 		}	
 		
 		@Override
@@ -61,10 +61,10 @@ public class Communicator extends UpperLayer{
 			} else if (msg instanceof Request) {
 				Request request = (Request) msg;
 				
-				request.setCommunicator(this);
+				request.setConnector(this);
 			}	
 			
-			// pass message to registered receivers
+			// deliver message to registered receivers
 			deliverMessage(msg);
 			
 		}

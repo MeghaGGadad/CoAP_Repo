@@ -80,9 +80,7 @@ public class MessageFormat {
 	private URI uri;
 	
 	/*
-	 * The message's version. Default message's version set to 1. Other numbers are reserved
-	 * for future versions
-	 */
+	 * The message's version. Default message's version set to 1. **/
 	private int version = 1;
 	
 	//The payload of message's 

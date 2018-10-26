@@ -6,7 +6,7 @@ public class PUTRequest extends Request {
 	public PUTRequest(){
 		super(CoAPCodeRegistries.PUT, true);
 	}
-	public void dispatch(HandelRequest handle) {
+	public void dispatch(HandleRequest handle) {
 		handle.performPUT(this);
 	}
 }

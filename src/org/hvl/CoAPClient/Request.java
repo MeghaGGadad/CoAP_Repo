@@ -2,6 +2,8 @@ package org.hvl.CoAPClient;
 
 import java.io.IOException;
 import java.net.SocketException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -16,7 +18,7 @@ import org.hvl.CoAP.MessageFormat;
 import org.hvl.CoAPServer.HandelResponse;
 import org.hvl.CoAPServer.Response;
 
-import org.hvl.CoAP.Communicator;
+import org.hvl.CoAP.DefaultConnector;
 import org.hvl.CoAP.MediaTypeRegistery;
 
 
@@ -65,6 +67,7 @@ public class Request extends MessageFormat {
 			
 			super(confirmable ? 
 				Type.CON : Type.NON, code);
+		     
 		}
 		
 		/* This method places a new response to this request, 
@@ -99,8 +102,8 @@ public class Request extends MessageFormat {
 			
 			// check if response is of remote origin, i.e.
 			// was received by a communicator
-			if (communicator != null) try {
-				communicator.sendMessage(response);
+			if (connector != null) try {
+				connector.sendMessage(response);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,17 +116,7 @@ public class Request extends MessageFormat {
 			++responseCount;
 		}
 			
-		/**
-		 * Wait for the response. This function blocks until there is a response or
-		 * the request has been canceled.
-		 * 
-		 * @return the response
-		 * @throws InterruptedException
-		 *             the interrupted exception
-		 */
-		/*public Response waitForResponse() throws InterruptedException {
-			return waitForResponse(0);
-		}*/	
+		
 		
        public void respondback(int code, String message) {
 			Response response = new Response(code);
@@ -234,24 +227,8 @@ public class Request extends MessageFormat {
 			return responseQueue != null;
 		}
 
-		/*
-		 * To check if the response queue is enabled
-		 * 
-		 * NOTE: The response queue must be enabled BEFORE any possible
-		 *       calls to responseReceive()
-		 * 
-		 * @return True iff the response queue is enabled, otherwise false
-		 */	
-		/**public boolean responseQueueOn() {
-		//if(responseQueue != null)
-		  //  return true;
-		//else
-			//return false;
-			if (on != responseQueueEnabled()) {
-				responseQueue = on ? new LinkedBlockingQueue<Response>() : null;
-			}
-			return on;
-		}**/	
+		
+			
 		
 		/*
 		 * This method is called whenever a response was placed to this request.
@@ -277,23 +254,10 @@ public class Request extends MessageFormat {
 
 		}
 		
-		/*@Override
-		public void handleBy(HandelMessage handler) {
-			handler.handleRequest(this);
-		}*/
 		
-		
-		
-		/*public void setToken(byte[] bs) {
-			// TODO Auto-generated method stub
-			
-		}*/
 
 
-		/*public Object send() {
-			// TODO Auto-generated method stub
-			return null;
-		}*/
+		
 		
 		/**
 		 * This method to set the request's options for host, port
@@ -303,7 +267,7 @@ public class Request extends MessageFormat {
 		 * @param uri the URI defining the target resource
 		 * @return this request
 		 */
-		/*public Request setURI(String uri) {
+		public Request setURI(String uri) {
 			try {
 				if (!uri.startsWith("coap://") && !uri.startsWith("coaps://"))
 					uri = "coap://" + uri;
@@ -312,7 +276,7 @@ public class Request extends MessageFormat {
 			} catch (URISyntaxException e) {
 				throw new IllegalArgumentException("Failed to set uri "+uri + ": " + e.getMessage());
 			}
-		}*/
+		}
 		
 		
 
@@ -367,37 +331,39 @@ public class Request extends MessageFormat {
 			return canceled;
 		}
 
-		private Communicator communicator;
+		private DefaultConnector connector;
 		
 		public void send() throws IOException{
-			Communicator comm = communicator != null ? communicator : defaultCommunicator();
+			DefaultConnector comm = connector != null ? connector : defaultCommunicator();
+			
+			int Port = 0;
 			if (comm != null) {
 				comm.sendMessage(this);
 			}
 			
 		}
 
-		private static Communicator DEFAULT_COMM;
+		private static DefaultConnector DEFAULT_COMM;
 		/*
 		 * Returns the default communicator used for outgoing requests
 		 * 
 		 * @return The default communicator
 		 */
-		public static Communicator defaultCommunicator() {
+		public static DefaultConnector defaultCommunicator() {
 			
 			// lazy initialization
 			if (DEFAULT_COMM == null) {
 				try {
-					DEFAULT_COMM = new Communicator();
+					DEFAULT_COMM = new DefaultConnector();
 				} catch (SocketException e) {
 					System.out.printf("[%s] Failed to create default communicator: %s\n", 
-						"CoAP", e.getMessage());
+					 e.getMessage());
 				}
 			}
 			return DEFAULT_COMM;
 		}
 
-		public void dispatch(HandelRequest handler) {
+		public void dispatch(HandleRequest handler) {
 			System.out.printf("Unable to dispatch request with code '%s'", 
 					CoAPCodeRegistries.toString(getCode()));
 		}
@@ -431,8 +397,8 @@ public class Request extends MessageFormat {
     	  return scheme == null ? MessageFormat.COAP_URI_SCHEME : scheme;
       }
 
-	public void setCommunicator(Communicator communicator) {
-		this.communicator = communicator;
+	public void setConnector(DefaultConnector con) {
+		this.connector = con;
 		
 	}
 

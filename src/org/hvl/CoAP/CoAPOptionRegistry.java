@@ -168,29 +168,32 @@ public class CoAPOptionRegistry {
 	 * @return
 	 */
 	public static boolean isElective(int optionNumber) {
-		return (optionNumber & 1) == 0;
+		//return (optionNumber & 1) == 0; // "&" is a bitwise AND operator
+		return (optionNumber % 1) == 0; //Alternative way to do this using modulus operator %
 	}
 	
 	//True if the option is critical
 	public static boolean isCritical(int optionNumber) {
-		return (optionNumber & 1) == 1;
+		//return (optionNumber & 1) == 1;
+		return (optionNumber % 1) == 1;
 	}
 	
 	/**section 5.4.2. Proxy Unsafe or Safe-to-Forward and NoCacheKey
 	 * Checks whether an option is unsafe.
 	 * @param optionNumber
 	 * The option number to check
-	 * @return {@code true} if the option is unsafe
+	 * @return true if the option is unsafe
 	 */
 	public static boolean isUnsafe(int optionNumber) {
 		// When bit 6 is 1, an option is Unsafe
-		return (optionNumber & 2) > 0;
+		//return (optionNumber & 2) > 0;
+		return (optionNumber % 2) > 0;
 	}
 	
 	/** Checks whether an option is safe.
 	 * @param optionNumber
 	 * The option number to check
-	 * @return {@code true} if the option is safe
+	 * @return true if the option is safe
 	 */
 	public static boolean isSafe(int optionNumber) {
 		return !isUnsafe(optionNumber);
@@ -200,13 +203,13 @@ public class CoAPOptionRegistry {
 	 * Checks whether an option is not a cache-key.
 	 * @param optionNumber
 	 * The option number to check
-	 * @return {@code true} if the option is not a cache-key
+	 * @return true if the option is not a cache-key
 	 */
 	public static boolean isNoCacheKey(int optionNumber) {
 		/*
 		 * When an option is not Unsafe, it is not a Cache-Key (NoCacheKey) if
 		 * and only if bits 3-5 are all set to 1; all other bit combinations
-		 * mean that it indeed is a Cache-Key(section 5.4.6. Option Numbers)
+		 * mean that it is a Cache-Key(section 5.4.6. Option Numbers)
 		 */
 		return (optionNumber & 0x1E) == 0x1C;
 	}
@@ -215,7 +218,7 @@ public class CoAPOptionRegistry {
 	 * Checks whether an option is a cache-key.
 	 * @param optionNumber
 	 * The option number to check
-	 * @return {@code true} if the option is a cache-key
+	 * @return true if the option is a cache-key
 	 */
 	public static boolean isCacheKey(int optionNumber) {
 		return !isNoCacheKey(optionNumber);

@@ -11,7 +11,7 @@ public class GETRequest extends Request {
 	
 	
 	
-	public void dispatch(HandelRequest handle) {
+	public void dispatch(HandleRequest handle) {
 		handle.performGET(this);
 	}
 

@@ -6,7 +6,7 @@ public class DELETERequest extends Request{
     public DELETERequest(){
     	super(CoAPCodeRegistries.DELETE, true);
     }
-    public void dispatch(HandelRequest handle) {
+    public void dispatch(HandleRequest handle) {
 		handle.performDELETE(this);
 	}
 }

@@ -9,14 +9,14 @@ import java.util.List;
 public abstract class Layer implements MessageReceiver {
 	
 	private List<MessageReceiver> receivers;
-	private int numMessagesSent;
-	private int numMessagesReceived;
+	private int incMessagesSent;
+	private int incMessagesReceived;
 	
 	public void sendMessage(MessageFormat msg) throws IOException {
 
 		if (msg != null) {
 			doSendMessage(msg);
-			++numMessagesSent;
+			++incMessagesSent;
 		}
 	}
 	
@@ -24,7 +24,7 @@ public abstract class Layer implements MessageReceiver {
 	public void receiveMessage(MessageFormat msg) {
 
 		if (msg != null) {
-			++numMessagesReceived;
+			++incMessagesReceived;
 			doReceiveMessage(msg);
 		}
 	}
@@ -68,11 +68,11 @@ public abstract class Layer implements MessageReceiver {
 	}
 	
 	public int getNumMessagesSent() {
-		return numMessagesSent;
+		return incMessagesSent;
 	}
 	
 	public int getNumMessagesReceived() {
-		return numMessagesReceived;
+		return incMessagesReceived;
 	}
 	
 	

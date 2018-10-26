@@ -7,14 +7,14 @@ import java.io.IOException;
 public abstract class UpperLayer extends Layer {
 	
 	
-	private Layer lowlayer;
+	private Layer layer;
 
-	public void sendMessageOverLowLayer(MessageFormat msg) throws IOException {
+	public void sendMessageOverLayer(MessageFormat msg) throws IOException {
 		
 		// check if layer assigned
-		if (lowlayer != null) {
+		if (layer != null) {
 			
-			lowlayer.sendMessage(msg);
+			layer.sendMessage(msg);
 		} //else {
 			
 			
@@ -26,21 +26,21 @@ public abstract class UpperLayer extends Layer {
 	public void setLowLayer(Layer layer) {
 		
 		// unsubscribe from old layer
-		if (lowlayer != null) {
-			lowlayer.unregisterReceiver(this);
+		if (layer != null) {
+			layer.unregisterReceiver(this);
 		}
 		
 		// set new lower layer
-		lowlayer = layer;
+	     layer = layer;
 		
 		// subscribe to new lower layer
 		if (layer != null) {
-			lowlayer.registerReceiver(this);
+			layer.registerReceiver(this);
 		}
 	}
 	
 	public Layer getLowLayer() {
-		return lowlayer;
+		return layer;
 	}
 	
 	
