@@ -8,7 +8,7 @@ public class POSTRequest extends Request {
 	   
    }
     
-   public void dispatch(HandleRequest handle) {
+   public void execute(HandleRequest handle) {
 		handle.performPOST(this);
 	}
 }
