@@ -66,36 +66,9 @@ public class ClientSocketHandler implements Runnable {
 				sb.setLength(0);
 				response.flush();
 
-			} /**else if (requestHeader.split("\n")[0].contains("PUT")
-					&& checkURL(file)) {
+			} 
 
-				// Get the data from the inputStream
-				temp = ".";
-				temp = request.readLine();
-				while (temp.contains("<html>")||temp.contains("<!doctype html>")||temp.contains("<!DOCTYPE html>")) {
-					while (!temp.equals("</html>")) {
-						temp = request.readLine();
-						System.out.println(temp);
-						putDataFromClient += temp + "\n";
-					}
-					putDataFromClient += "</html>";
-				}**/
-
-				// PUT the data to file serverIndex.html
-				/**if (putDataFromClient != "") {
-					int responseCode = putData(putDataFromClient, file);
-					constructResponseHeader(responseCode, sb);
-					response.write(sb.toString());
-					sb.setLength(0);
-					response.flush();
-				} else {
-					constructResponseHeader(304, sb);
-					response.write(sb.toString());
-					sb.setLength(0);
-					response.flush();
-				}
-
-			}**/ 
+				
 			else {
 				// Enter the error code
 				// 404 page not found
@@ -119,9 +92,7 @@ public class ClientSocketHandler implements Runnable {
 	private static boolean checkURL(String file) {
 
 		File myFile = new File(file);
-//		System.out.println(file);
-//		System.out.println("IT IS CHEKCING");
-//		System.out.println(myFile.exists() && !myFile.isDirectory());
+
 		return myFile.exists() && !myFile.isDirectory();
 
 	}
@@ -132,7 +103,7 @@ public class ClientSocketHandler implements Runnable {
 
 		if (responseCode == 200) {
 
-			sb.append("HTTP/2.0 200 OK\r\n");
+			sb.append("HTTP/1.1 200 OK\r\n");
 			sb.append("Date:" + getTimeStamp() + "\r\n");
 			sb.append("Server:localhost\r\n");
 			sb.append("Content-Type: text/html\r\n");
@@ -140,12 +111,12 @@ public class ClientSocketHandler implements Runnable {
 
 		} else if (responseCode == 404) {
 
-			sb.append("HTTP/2.0 404 Not Found\r\n");
+			sb.append("HTTP/1.1 404 Not Found\r\n");
 			sb.append("Date:" + getTimeStamp() + "\r\n");
 			sb.append("Server:localhost\r\n");
 			sb.append("\r\n");
 		} else if (responseCode == 304) {
-			sb.append("HTTP/2.0 304 Not Modified\r\n");
+			sb.append("HTTP/1.1 304 Not Modified\r\n");
 			sb.append("Date:" + getTimeStamp() + "\r\n");
 			sb.append("Server:localhost\r\n");
 			sb.append("\r\n");
