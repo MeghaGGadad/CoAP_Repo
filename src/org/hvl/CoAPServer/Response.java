@@ -18,7 +18,7 @@ public class Response extends MessageFormat {
 	}
 	
 	public Response(int code) {
-		setCode(code);
+		setMethodCode(code);
 	}
 	
 	/**
@@ -78,11 +78,11 @@ public class Response extends MessageFormat {
 	}
 	
 	public boolean isPiggyBacked() {
-		return isAcknowledgement() && getCode() != CoAPCodeRegistries.EMPTY_MESSAGE;
+		return isAcknowledgement() && getMethodCode() != CoAPCodeRegistries.EMPTY_MESSAGE;
 	}
 
 	public boolean isEmptyACK() {
-		return isAcknowledgement() && getCode() == CoAPCodeRegistries.EMPTY_MESSAGE;
+		return isAcknowledgement() && getMethodCode() == CoAPCodeRegistries.EMPTY_MESSAGE;
 	}
 
 	

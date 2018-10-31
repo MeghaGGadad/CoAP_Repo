@@ -4,7 +4,6 @@ package org.hvl.CoAP;
 
 
 
-
 public class CoAPOptionRegistry {
 
 	//section 12.2. CoAPOptionNumbersRegistry 

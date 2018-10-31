@@ -2,14 +2,7 @@ package org.hvl.Interfaces;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.nio.channels.DatagramChannel;
-import java.util.HashMap;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.SimpleLayout;
 import org.hvl.CoAP.MessageFormat;
 
 
@@ -17,12 +10,12 @@ import org.hvl.CoAP.MessageFormat;
 
 public class CoapBasicSocketHandler implements CoapSocketHandler{
 	
-	private final static Logger logger = Logger.getLogger(CoapBasicSocketHandler.class);
-	private ChannelManager channelManager = null;
+	//private final static Logger logger = Logger.getLogger(CoapBasicSocketHandler.class);
+	//private ChannelManager channelManager = null;
 	private int localPort;
-	private DatagramChannel dgramChannel = null;
+	//private DatagramChannel dgramChannel = null;
 	 //protected HashMap<ChannelKey, ClientChannel> clientChannels = new HashMap<ChannelKey, ClientChannel>();
-	public CoapBasicSocketHandler(ChannelManager channelManager, int port) throws IOException {
+	/**public CoapBasicSocketHandler(ChannelManager channelManager, int port) throws IOException {
         logger.addAppender(new ConsoleAppender(new SimpleLayout()));
         // ALL | DEBUG | INFO | WARN | ERROR | FATAL | OFF:
         logger.setLevel(Level.WARN);
@@ -35,12 +28,16 @@ public class CoapBasicSocketHandler implements CoapSocketHandler{
        
         //workerThread = new WorkerThread();
        // workerThread.start();
-    }
+    }**/
 	
 	public CoapBasicSocketHandler(ChannelManager channelManager) throws IOException {
         this(channelManager, 9876);
     }
    
+	public CoapBasicSocketHandler(ChannelManager channelManager, int port) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
     public int getLocalPort() {
 		return localPort;
@@ -51,8 +48,8 @@ public class CoapBasicSocketHandler implements CoapSocketHandler{
         clientChannels.remove(new ChannelKey(channel.getRemoteAddress(), channel.getRemotePort()));
     }**/
 	
-	@Override
-    public ClientChannel connect(Client client, InetAddress remoteAddress,
+	/**@Override
+    public Channel connect(Client client, InetAddress remoteAddress,
             int remotePort) {
     	if (client == null){
     		return null;
@@ -63,13 +60,13 @@ public class CoapBasicSocketHandler implements CoapSocketHandler{
     		//logger.warn("Cannot connect: Client channel already exists");
     		//return null;
     	//}
-    	ClientChannel channel = null;
+    	//Channel channel = null;
          //ClientChannel channel = new CoapBasicClientChannel(this, client, remoteAddress, remotePort);
     	
     	
         //addClientChannel(channel);
-        return channel;
-    }
+        //return channel;
+    //}**/
 
 	@Override
 	public void close() {
@@ -81,5 +78,11 @@ public class CoapBasicSocketHandler implements CoapSocketHandler{
 	public void sendMessage(MessageFormat msg) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Channel connect(Client client, InetAddress remoteAddress, int remotePort) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -9,17 +9,14 @@ import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-
 import org.hvl.CoAP.CoAPCodeRegistries;
 import org.hvl.CoAP.CoAPCodeRegistries.Code;
 import org.hvl.CoAP.CoAPCodeRegistries.Type;
 import org.hvl.CoAP.CoAPOptionRegistry;
-import org.hvl.CoAP.MessageFormat;
-import org.hvl.CoAPServer.HandelResponse;
-import org.hvl.CoAPServer.Response;
-
 import org.hvl.CoAP.DefaultConnector;
-import org.hvl.CoAP.MediaTypeRegistery;
+import org.hvl.CoAP.MessageFormat;
+import org.hvl.CoAPServer.Response;
+import org.hvl.Interfaces.ServerChannel;
 
 
 
@@ -38,7 +35,7 @@ public class Request extends MessageFormat {
 	
 	Request request;
 	// list of response handlers that are notified about incoming responses
-	private List<HandelResponse> responseHandlers;
+	private List<ServerChannel> responseHandlers;
 	
 	//private static final long startTime = System.currentTimeMillis();
 	
@@ -182,13 +179,13 @@ public class Request extends MessageFormat {
 		 * 
 		 * 
 		 */
-		public void ResponseHandlerRegister(HandelResponse handler) {
+		public void ResponseHandlerRegister(ServerChannel handler) {
 
 			if (handler != null) {
 				
 				// creation of response handler list
 				if (responseHandlers == null) {
-					responseHandlers = new ArrayList<HandelResponse>();
+					responseHandlers = new ArrayList<ServerChannel>();
 				}
 				
 				responseHandlers.add(handler);
@@ -200,7 +197,7 @@ public class Request extends MessageFormat {
 		 * 
 		 * @param handler The observer to remove from the handler list
 		 */	
-		public void ResponseHandlerUnregister(HandelResponse handler) {
+		public void ResponseHandlerUnregister(ServerChannel handler) {
 
 			if (handler != null && responseHandlers != null) {
 				
@@ -247,7 +244,7 @@ public class Request extends MessageFormat {
 		
 			// notify response handlers
 			if (responseHandlers != null) {
-				for ( HandelResponse handler : responseHandlers) {
+				for ( ServerChannel handler : responseHandlers) {
 					handler.handleResponse(response);
 				}
 			}
@@ -365,7 +362,7 @@ public class Request extends MessageFormat {
 
 		public void dispatch(HandleRequest handler) {
 			System.out.printf("Unable to dispatch request with code '%s'", 
-					CoAPCodeRegistries.toString(getCode()));
+					CoAPCodeRegistries.toString(getMethodCode()));
 		}
 
 		public void log() {

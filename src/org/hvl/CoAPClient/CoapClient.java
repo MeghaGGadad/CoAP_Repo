@@ -1,4 +1,4 @@
-package org.hvl.CoAPClient;
+/**package org.hvl.CoAPClient;
 
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -47,20 +47,20 @@ public class CoapClient implements Client{
     } catch (ParseException e) {
         System.out.println("Unexpected exception: " + e.getMessage() );
         //printInfo();
-        showHelp(options);
+       // showHelp(options);
     }
     
  // Make sure we have at least the URI argument
     if (cmd == null || cmd.getArgs().length != 1) {
     	//printInfo();
-    	showHelp(options);
+    	///showHelp(options);
     }
 			
 					
 		
-		CoapClient client = new CoapClient();
-        client.channelManager = CoapChannelManager.getInstance();
-        client.runTestClient(cmd);
+		//CoapClient client = new CoapClient();
+        //client.channelManager = CoapChannelManager.getInstance();
+        //client.runTestClient(cmd);
 }
     public static void showHelp(Options options) {
         HelpFormatter formatter = new HelpFormatter();
@@ -69,7 +69,7 @@ public class CoapClient implements Client{
                 + "    JCoAP-Client -m get coap://[::1]/.well-known/core\n");
         System.exit(-1);
 }
-    public void runTestClient(CommandLine cmd) throws UnknownHostException{
+   /** public void runTestClient(CommandLine cmd) throws UnknownHostException{
     	while(true){ //new
             try {
                 String urlOrig = cmd.getArgs()[0];
@@ -147,7 +147,7 @@ public class CoapClient implements Client{
 	 * 
 	 * 
 	 */
-	public static void printInfo() {
+	/**public static void printInfo() {
 		System.out.println("Java Coap Simple Client");
 		System.out.println();
 		System.out.println("Usage: SimpleClient [-l] METHOD URI [PAYLOAD]");
@@ -160,17 +160,17 @@ public class CoapClient implements Client{
 		System.out.println("Examples:");
 		System.out.println("  SimpleClient GET coap://10.0.1.97:5683/temp");
 		System.out.println("  SimpleClient POST coap://example.com:5683/~sensors/readings.xml");
-	}
+	}**/
 	
-	@Override
-	public void onResponse(ClientChannel channel, Response response) {
+	/**@Override
+	public void uponResponse(ClientChannel channel, Response response) {
 		System.out.println("Received response");
-	}
+	}**/
     
 	
-	@Override
-	public void onConnectionFailed(ClientChannel channel, boolean notReachable, boolean resetByServer) {
+	/**@Override
+	public void uponConnectionFailed(ClientChannel channel, boolean notReachable, boolean resetByServer) {
 		System.out.println("Connection Failed");
-	}
+	}**/
 	
-}
+//}

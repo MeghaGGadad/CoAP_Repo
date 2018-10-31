@@ -33,6 +33,7 @@ public interface ServerChannel extends Channel{
 	/* used by a server to send a notification (observing resources) */
 	public void sendNotification(Response response);
 
+	void handleResponse(Response response);
 
 
 }

@@ -8,7 +8,7 @@ import org.hvl.CoAP.MessageFormat;
 
 public interface CoapSocketHandler {
 	
-	public ClientChannel connect(Client client, InetAddress remoteAddress, int remotePort);
+	public Channel connect(Client client, InetAddress remoteAddress, int remotePort);
 
     public void close();
 

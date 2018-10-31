@@ -276,7 +276,7 @@ public class MessageFormat {
 		ack.setURI(msg.getURI());
 		
 		// create an empty Acknowledgement by default,can be piggy-backed with a response by the user
-		ack.setCode(CoAPCodeRegistries.EMPTY_MESSAGE);
+		ack.setMethodCode(CoAPCodeRegistries.EMPTY_MESSAGE);
 		
 		return ack;
 	}
@@ -297,7 +297,7 @@ public class MessageFormat {
   		// Reset must be empty(page 8)
   		//Empty Message
   		 //A message with a Code of 0.00; neither a request nor a response.
-  		rst.setCode(CoAPCodeRegistries.EMPTY_MESSAGE);
+  		rst.setMethodCode(CoAPCodeRegistries.EMPTY_MESSAGE);
   		
   		return rst;
   	}
@@ -416,11 +416,11 @@ public class MessageFormat {
   	 * @param code The message code to which the current message code should
   	 *             be set to
   	 */
-      public void setCode(int code) {
+      public void setMethodCode(int code) {
   		this.code = code;
   	}
       
-      public int getCode() {
+      public int getMethodCode() {
   		return this.code;
   	}
       /*
