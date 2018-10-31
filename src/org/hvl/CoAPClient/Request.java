@@ -331,11 +331,11 @@ public class Request extends MessageFormat {
 		private DefaultConnector connector;
 		
 		public void send() throws IOException{
-			DefaultConnector comm = connector != null ? connector : defaultCommunicator();
+			DefaultConnector con = connector != null ? connector : defaultCommunicator();
 			
 			int Port = 0;
-			if (comm != null) {
-				comm.sendMessage(this);
+			if (con != null) {
+				con.sendMessage(this);
 			}
 			
 		}

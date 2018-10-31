@@ -58,12 +58,6 @@ public class Response extends MessageFormat {
 		}
 	}
 	
-	/*@Override
-	protected void payloadAppended(byte[] block) {
-		if (request != null) {
-			request.responsePayloadAppended(this, block); 
-		}
-	}*/
 	
 	@Override
 	protected void completed() {

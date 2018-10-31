@@ -14,12 +14,10 @@ public interface CoapSocketHandler {
 
     public void sendMessage(MessageFormat msg);
 
-    //public CoapChannelManager getChannelManager();
+    int getLocalPort();
 
-	int getLocalPort();
+	
 
-	//void removeClientChannel(ClientChannel channel);
-
-	//void removeServerChannel(ServerChannel channel);
+	
 
 }

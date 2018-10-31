@@ -48,30 +48,16 @@ public class SimpleServer implements Server{
 		
 		
 		channel.sendMessage(response);
-		//try { //new
-	        //Thread.sleep(10000); //new
-	       //} catch (InterruptedException e) { //new
-	         //e.printStackTrace();//new
+		
 	       }
-    	//}//
-	//}
+    	
 
 	public void onSeparateResponseFailed(ServerChannel channel) {
 		System.out.println("Separate response transmission failed.");
 		
 	}
 
-	//@Override
-	/**public Server onAccept(Request request) {
-		// TODO Auto-generated method stub
-		return null;
-	}**/
-
-	//@Override
-	/**public void onRequest(ServerChannel channel, org.hvl.Interfaces.Request request) {
-		// TODO Auto-generated method stub
-		
-	}**/
+	
 
 	
 	}

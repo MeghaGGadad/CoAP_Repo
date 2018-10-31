@@ -70,7 +70,7 @@ public class CoapChannelManager implements ChannelManager{
 	    public Channel connect(Client client, InetAddress addr, int port) {
 	    	CoapSocketHandler socketHandler = null;
 			try {
-				socketHandler = new CoapBasicSocketHandler(this);
+				socketHandler = new BasicSocketHandler(this);
 				SocketInformation sockInfo = new SocketInformation(socketHandler, null); 
 				//socketMap.put(socketHandler.getLocalPort());
 				return socketHandler.connect(client, addr, port);
