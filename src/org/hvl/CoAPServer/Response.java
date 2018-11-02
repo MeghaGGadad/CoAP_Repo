@@ -67,7 +67,7 @@ public class Response extends MessageFormat {
 	}
 	
 	@Override
-	public void handleBy(HandleMessage handler) {
+	public void handle(HandleMessage handler) {
 		handler.HandelResponse(this);
 	}
 	

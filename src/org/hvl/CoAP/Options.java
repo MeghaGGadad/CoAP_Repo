@@ -94,7 +94,7 @@ public class Options {
 			if (val == 0) {
 				buf = ByteBuffer.allocate(1);
 				buf.put((byte) 0);
-			} else {ByteBuffer aux = ByteBuffer.allocate(4);//allocates new buffer
+			} else {ByteBuffer aux = ByteBuffer.allocate(4);//allocates new buffer of size 4
 				aux.putInt(val);//writes int val
 				for (int i=3; i >= 0; i--) {
 					if (aux.get(3-i) == 0x00) {
@@ -166,13 +166,5 @@ public class Options {
 			}
 			return str;
 		}
-
-	
-	
-
-	
-
-	
-	
 
 }

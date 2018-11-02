@@ -331,7 +331,7 @@ public class Request extends MessageFormat {
 		private DefaultConnector connector;
 		
 		public void send() throws IOException{
-			DefaultConnector con = connector != null ? connector : defaultCommunicator();
+			DefaultConnector con = connector != null ? connector : defaultConnector();
 			
 			int Port = 0;
 			if (con != null) {
@@ -340,24 +340,19 @@ public class Request extends MessageFormat {
 			
 		}
 
-		private static DefaultConnector DEFAULT_COMM;
+		private static DefaultConnector DEFAULT_CONN;
 		/*
 		 * Returns the default communicator used for outgoing requests
 		 * 
 		 * @return The default communicator
 		 */
-		public static DefaultConnector defaultCommunicator() {
+		public static DefaultConnector defaultConnector() {
 			
 			// lazy initialization
-			if (DEFAULT_COMM == null) {
-				try {
-					DEFAULT_COMM = new DefaultConnector();
-				} catch (SocketException e) {
-					System.out.printf("[%s] Failed to create default communicator: %s\n", 
-					 e.getMessage());
-				}
+			if (DEFAULT_CONN == null) {
+				DEFAULT_CONN= new DefaultConnector();
 			}
-			return DEFAULT_COMM;
+			return DEFAULT_CONN;
 		}
 
 		public void dispatch(HandleRequest handler) {

@@ -11,10 +11,10 @@ public class DetailPrint {
 	
 	
 	/**
-	 * Change a Request into a readable String representation. 
+	 * Below method display a Request into a readable String representation. 
 	 * 
 	 * @param r the Request
-	 * @return the pretty print
+	 * @return the detailPrint print
 	 */
 	public static String detailPrint(Request r) {
 	
@@ -42,7 +42,7 @@ public class DetailPrint {
 	 * Change a Response into a readable String representation. 
 	 * 
 	 * @param r the Response
-	 * @return the pretty print
+	 * @return the detailPrint
 	 */
 	public static String detailPrint(Response r) {
 	

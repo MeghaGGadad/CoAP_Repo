@@ -248,8 +248,8 @@ public class MessageFormat {
   		return options;
   	}
       
-      public List<Options> getOptions(int optionNumber) {
-  		return optionMap.get(optionNumber);
+      public List<Options> getOptions(int optNumber) {
+  		return optionMap.get(optNumber);
   	}
       
       public boolean hasFormat(int mediaType) {
@@ -391,17 +391,8 @@ public class MessageFormat {
   		this.payload = payload;
   	}
       
-      //public MessageFormat(URI uri2) {
-    	  //this(uri2.toString());
-	//}
-
-
-	//public MessageFormat(String uri2) {
-		//this.uri = uri;
-	//}
-
-
-	/*This procedure sets the ID of this Coap message
+      
+  /*This procedure sets the ID of this Coap message
   	 * 
   	 * @param id The message ID to which the current message ID should
   	 *           be set to
@@ -497,8 +488,8 @@ public class MessageFormat {
 		return isAcknowledgement() || isReset();
 	}
 	
-	public void handleBy(HandleMessage handler) {
-		// TODO Auto-generated method stub
+	public void handle(HandleMessage handler) {
+		// subclasses can implement
 		
 	}
 	

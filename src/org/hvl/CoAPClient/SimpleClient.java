@@ -14,8 +14,6 @@ public class SimpleClient {
 		private static final int URI_INDEX     = 1;
 		private static final int PAYLOAD_INDEX = 2;
 		
-		private static final String DISCOVERY_RESOURCE = "/.well-known/core";
-		
 		Response response = null;
 		
 		/*
@@ -27,9 +25,7 @@ public class SimpleClient {
 			String method  = null;
 			String uri     = null;
 			String payload = null;
-			boolean loop   = false;
-
-		// display information  if no arguments specified
+			// display information  if no arguments specified
 			if (args.length == 0) {
 				printInfo();
 				return;
@@ -37,9 +33,8 @@ public class SimpleClient {
 
 			int index = 0;
 			for (String arg : args) {
-				if (arg.startsWith("-")) {
-					if (arg.equals("-l")) {
-						loop = true;
+				if (arg.startsWith("/")) {
+					if (arg.equals("0")) {
 					} else {
 						System.out.println("Unrecognized option: " + arg);
 					}

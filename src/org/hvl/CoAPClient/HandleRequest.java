@@ -1,7 +1,5 @@
 package org.hvl.CoAPClient;
 
-import org.hvl.CoAP.MessageFormat;
-
 
 public interface HandleRequest {
 	

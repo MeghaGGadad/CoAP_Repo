@@ -15,7 +15,7 @@ public abstract class Layer implements MessageReceiver {
 	public void sendMessage(MessageFormat msg) throws IOException {
 
 		if (msg != null) {
-			doSendMessage(msg);
+			performSendMessage(msg);
 			++incMessagesSent;
 		}
 	}
@@ -25,14 +25,14 @@ public abstract class Layer implements MessageReceiver {
 
 		if (msg != null) {
 			++incMessagesReceived;
-			doReceiveMessage(msg);
+			performReceiveMessage(msg);
 		}
 	}
 	
-	protected abstract void doSendMessage(MessageFormat msg)
+	protected abstract void performSendMessage(MessageFormat msg)
 		throws IOException; 
 	
-	protected abstract void doReceiveMessage(MessageFormat msg);
+	protected abstract void performReceiveMessage(MessageFormat msg);
 	
 	protected void deliverMessage(MessageFormat msg) {
 
@@ -44,30 +44,7 @@ public abstract class Layer implements MessageReceiver {
 		}
 	}
 	
-	public void registerReceiver(MessageReceiver receiver) {
-		
-		// check for valid receiver
-		if (receiver != null && receiver != this) {
-			
-			// lazy creation of receiver list
-			if (receivers == null) {
-				receivers = new ArrayList<MessageReceiver>();
-			}
-			
-			// add receiver to list
-			receivers.add(receiver);
-		}
-	}
-	
-	public void unregisterReceiver(MessageReceiver receiver) {
-		
-		// remove receiver from list
-		if (receivers != null) {
-			receivers.remove(receiver);
-		}
-	}
-	
-	public int getNumMessagesSent() {
+   public int getNumMessagesSent() {
 		return incMessagesSent;
 	}
 	
@@ -75,7 +52,21 @@ public abstract class Layer implements MessageReceiver {
 		return incMessagesReceived;
 	}
 	
-	
+	private Layer layer;
+
+	public void sendMessageOverLayer(MessageFormat msg) throws IOException {
+		
+		// check if layer assigned
+		if (layer != null) {
+			
+			layer.sendMessage(msg);
+		} //else {
+			
+			
+			//System.out.printf("[%s] ERROR: No layer present", 
+				//getClass().getName());
+		//}
+	}
 
 }
 

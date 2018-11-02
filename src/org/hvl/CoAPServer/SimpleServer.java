@@ -11,9 +11,6 @@ import org.hvl.CoAPClient.Request;
 import org.hvl.Interfaces.Server;
 import org.hvl.Interfaces.ServerChannel;
 
-
-
-
 public class SimpleServer implements Server{
 	
 	private static final int PORT = 5683;
@@ -36,7 +33,7 @@ public class SimpleServer implements Server{
 
 	
 	public void onRequest(ServerChannel channel, Request request) {
-		//while(true){
+		
 		System.out.println("Received message: " + request.toString()+ " URI: " + request.getURI());
 		
 		MessageFormat response = (MessageFormat) channel.createResponse(request,
@@ -44,9 +41,6 @@ public class SimpleServer implements Server{
 		response.setContentType(MediaTypeRegistery.PLAIN);
 		
 		response.setPayload("payload...".getBytes());
-		
-		
-		
 		channel.sendMessage(response);
 		
 	       }

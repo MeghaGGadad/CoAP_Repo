@@ -1,9 +1,6 @@
 package org.hvl.CoAP;
 
 
-
-
-
 public class CoAPOptionRegistry {
 
 	//section 12.2. CoAPOptionNumbersRegistry 
@@ -25,21 +22,11 @@ public class CoAPOptionRegistry {
 	public static final int TOKEN               = 13;
 	public static final int OBSERVE             = 10; 
 	public static final int CONTENT_TYPE        = 1;
-	
-	public static final int MAX_LENGTH = 270;
-	
-	
+    public static final int MAX_LENGTH = 270;
 	private Integer content_format;
 	
-	
-	
-
-
-	
-
-
-	public static String toString(int optionNumber) {
-		switch (optionNumber) {
+   public static String toString(int optNumber) {
+		switch (optNumber) {
 		case RESERVED_Zero:
 			return "Reserved (0)";
 		case URI_HOST:
@@ -62,7 +49,7 @@ public class CoAPOptionRegistry {
 			return "Uri-Query";
 		
 		}
-		return String.format("Unspecified option number %d----", optionNumber);
+		return String.format("Unspecified option number %d----", optNumber);
 	}
 
 	
@@ -80,12 +67,12 @@ public class CoAPOptionRegistry {
 	 * This method returns an Option with it's default value corresponding to
 	 * a given option number
 	 * 
-	 * @param optionNumber The given option number
+	 * @param optNumber The given option number
 	 * @return An option corresponding to the given option number containing
 	 *         the default value as specified in Table 4: Options
 	 */
-	public static Options getDefaultOption (int optionNumber) {
-		switch(optionNumber) {
+	public static Options getDefaultOption (int optNumber) {
+		switch(optNumber) {
 		
 		case MAX_AGE:
 			return new Options (60, MAX_AGE);
@@ -117,11 +104,11 @@ public class CoAPOptionRegistry {
 	
 	/**As defined in the section 5.10. Option Definitions
 	 * Returns the option format based on the option number
-	 *@param optionNumber The option number
+	 *@param optNumber The option number
 	 * @return The option format corresponding to the option number
 	 */
-	public static optionFormats getFormatByNum (int optionNumber) {
-		switch (optionNumber) {
+	public static optionFormats getFormatByNum (int optNumber) {
+		switch (optNumber) {
 		case RESERVED_Zero:
 			return optionFormats.unknown;
 		case PROXY_URI:
@@ -223,31 +210,4 @@ public class CoAPOptionRegistry {
 		return !isNoCacheKey(optionNumber);
 	}
 	
-	/*
-	 *  method returns an Uri-Host Option with a given IP address 
-	 * corresponding to the given option number
-	 */
-	public static Options getDefaultOption (int optionNumber, String ipAddress) {
-		return new Options (ipAddress, URI_HOST);
-	}
-
-
-	
-	
-	public CoAPOptionRegistry setAccept(int format) {
-		if (format < 0 || format > ((1<<16)-1))
-			throw new IllegalArgumentException("Accept option must be between 0 and "+((1<<16)-1)+" (2 bytes) inclusive");
-		int accept = format;
-		return this;
-	}
-
-
-	
-
-
-	
-	
-	
-    
-
 }
