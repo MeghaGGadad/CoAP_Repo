@@ -142,7 +142,7 @@ public class MessageFormat {
 	 * @param payload The payload to which the current message payload should be
 	 *  
 	 */
-	public void setPayload(byte[] payload) {
+	public void setPayloadByte(byte[] payload) {
 		this.payload = payload;
 	}
 	
@@ -150,7 +150,7 @@ public class MessageFormat {
 		if (payload != null) {
 			try {
 				// set internal byte array
-				setPayload(payload.getBytes("UTF-8"));
+				setPayloadByte(payload.getBytes("UTF-8"));
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 				return;
@@ -161,7 +161,7 @@ public class MessageFormat {
 		}
 	}
 	
-	public void setPayload(String payload) {
+	public void setPayloadString(String payload) {
 		setPayload(payload, MediaTypeRegistery.PLAIN);
 	}
 	
@@ -190,7 +190,7 @@ public class MessageFormat {
 	 * @return the payload size
 	 */
 	public int getpayloadSize() {
-		//return payload == null ? 0 : payload.length;
+		
         if(payload == null)
         	return 0;
         else 
@@ -202,16 +202,16 @@ public class MessageFormat {
 	 * Returns blank string if no
 	 * payload is defined.
 	 */
-	public String getPayloadString() {
+	public String getPayloadAsString() {
 		if (payload==null)
 			return "";
 		return new String(payload, UTF8_CHARSET);
 	}
 	
 	
-	public void setOptions(int optionNumber, List<Options> opt) {
+	public void setOptions(int optNum, List<Options> opt) {
 		// TODO Check if all options are consistent with optionNumber
-		optionMap.put(optionNumber, opt);
+		optionMap.put(optNum, opt);
 	}
 
 	/*
@@ -220,9 +220,11 @@ public class MessageFormat {
 	public Options getFirstOption(int optNum) {
   		
   		List<Options> list = getOptions(optNum);
-  		return list != null && !list.isEmpty() ? list.get(0) : null;
-  	    
-	
+  		
+  	    if(list != null && !list.isEmpty())
+  	    	return list.get(0);
+  	    else
+  	    	return null;
 	}
       
       public void addOption(Options opt) {
@@ -269,7 +271,7 @@ public class MessageFormat {
 		ack.setType(CoAPCodeRegistries.Type.ACK);
 		
 		// echo the Message ID(4.2)
-		ack.setID(msg.getID());
+		ack.setMID(msg.getMID());
 		
 		// set receiver URI to sender URI of the message
 		// to acknowledge
@@ -289,7 +291,7 @@ public class MessageFormat {
   		rst.setType(CoAPCodeRegistries.Type.RST);
   		
   		// echo the Message ID
-  		rst.setID(msg.getID());
+  		rst.setMID(msg.getMID());
   		
   		// set receiver URI to sender URI of the message to reset
   		rst.setURI(msg.getURI());
@@ -330,7 +332,7 @@ public class MessageFormat {
   	 * @return The current ID.
   	 */  
     
-	public int getID() {
+	public int getMID() {
     	  return this.MID;
 	}
 	
@@ -397,7 +399,7 @@ public class MessageFormat {
   	 * @param id The message ID to which the current message ID should
   	 *           be set to
   	 */
-      public int setID(int id) {
+      public int setMID(int id) {
   		return(this.MID = id);
   	}
     
@@ -504,13 +506,13 @@ public void DetailPrint(PrintStream out) {
 		out.printf("Code of the Message  : %s\n", CoAPCodeRegistries.toString(code));
 		out.printf("Options of the Message: %d\n", options.size());
 		for (Options opt : options) {
-			out.printf("  * %s: %s (%d Bytes)\n", 
-				opt.getName(), opt.getDisplayVal(), opt.getLength()
+			out.printf("  * %s:  (%d Bytes)\n", 
+				opt.getName(), opt.getLength()
 			);
 		}
 		out.printf("Payload: %d Bytes\n", getpayloadSize());
 		out.println("------------------------------------------------------");
-		if (getpayloadSize() > 0) out.println(getPayloadString());
+		if (getpayloadSize() > 0) out.println(getPayloadAsString());
 		out.println("-----------------------------------------------");
 		
 	}
@@ -581,14 +583,14 @@ public void DetailPrint(PrintStream out) {
 	 * 
 	 * @param msg1 The first message
 	 * @param msg2 the second message
-	 * @return True iif the messages are same
+	 * @return True if the messages are same
 	 */
 	public static boolean isDuplicateMessageID(MessageFormat msg1, MessageFormat msg2) 
 	{
 		
 		if (
 			msg1 != null && msg2 != null &&  // both messages must exist
-		                  msg1.getID() == msg2.getID()     // checks for the same IDs
+		                  msg1.getMID() == msg2.getMID()     // checks for the same IDs
 		) 
 			
 		return true;

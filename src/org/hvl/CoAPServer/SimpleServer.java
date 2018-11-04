@@ -21,8 +21,8 @@ public class SimpleServer implements Server{
         
         SimpleServer server = new SimpleServer();
         //ChannelManager channelManager = null;
-        ChannelManager channelManager = CoapChannelManager.getInstance();
-        channelManager.createServerListener(server, PORT);
+        ChannelManager chManager = CoapChannelManager.getInstance();
+        chManager.createServerListener(server, PORT);
         
     }
 
@@ -32,21 +32,21 @@ public class SimpleServer implements Server{
 	}
 
 	
-	public void onRequest(ServerChannel channel, Request request) {
+	public void onRequest(ServerChannel ch, Request req) {
 		
-		System.out.println("Received message: " + request.toString()+ " URI: " + request.getURI());
+		System.out.println("Received message: " + req.toString()+ " URI: " + req.getURI());
 		
-		MessageFormat response = (MessageFormat) channel.createResponse(request,
+		MessageFormat response = (MessageFormat) ch.createResponse(req,
 				CoAPCodeRegistries.ResponseCode.CONTENT);
 		response.setContentType(MediaTypeRegistery.PLAIN);
 		
-		response.setPayload("payload...".getBytes());
-		channel.sendMessage(response);
+		response.setPayloadByte("payload...".getBytes());
+		ch.sendMessage(response);
 		
 	       }
     	
 
-	public void onSeparateResponseFailed(ServerChannel channel) {
+	public void onSeparateResponseFailed(ServerChannel ch) {
 		System.out.println("Separate response transmission failed.");
 		
 	}

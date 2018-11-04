@@ -77,9 +77,9 @@ public class SimpleClient {
 				return;
 			}
 		    System.out.println("Request sent...");
-			request.setPayload(payload);
+			request.setPayloadString(payload);
 		   // enable response queue in order to use blocking I/O
-			request.ResponseQueueEnable(true);
+			request.EnableResponseQueue(true);
 			
 			request.send();
 			
@@ -118,7 +118,7 @@ public class SimpleClient {
 				if (response != null) {
 					
 					response.Printlog();
-					System.out.println("Total Time (ms): " + response.getTime());
+					System.out.println("Total Time (ms): " + response.getRoundTripTime());
 					
 				}
 				

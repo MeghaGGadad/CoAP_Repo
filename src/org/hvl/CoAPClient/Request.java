@@ -81,7 +81,7 @@ public class Request extends MessageFormat {
 
 			
 			if (responseCount == 0 && isConfirmable()) {
-				response.setID(getID());
+				response.setMID(getMID());
 			}
 			
 			// set message type
@@ -118,7 +118,7 @@ public class Request extends MessageFormat {
        public void respondback(int code, String message) {
 			Response response = new Response(code);
 			if (message != null) {
-				response.setPayload(message);
+				response.setPayloadString(message);
 			}
 			respondback(response);
 		}
@@ -155,9 +155,9 @@ public class Request extends MessageFormat {
 		public Response responseReceive() throws InterruptedException {
 			
 			// queue needed to perform this operation
-			if (!responseQueueEnabled()) {
+			if (!EnabledResponseQueue()) {
 				System.out.println("WARNING: Responses may be lost, because of  Missing useResponseQueue(true) call, ");
-				ResponseQueueEnable(true);
+				EnableResponseQueue(true);
 			}
 			
 			// receive response from a response queue
@@ -169,7 +169,7 @@ public class Request extends MessageFormat {
 		
 		@Override
 		public void timedOut() {
-			if (responseQueueEnabled()) {
+			if (EnabledResponseQueue()) {
 				responseQueue.offer(TIMEOUT_RESPONSE);
 			}
 		}
@@ -214,13 +214,13 @@ public class Request extends MessageFormat {
 		 * @param enable True to make enable and false to disable the response queue,
 		 * respectively
 		 */
-		public void ResponseQueueEnable(boolean on) {
-			if (on != responseQueueEnabled()) {
+		public void EnableResponseQueue(boolean on) {
+			if (on != EnabledResponseQueue()) {
 				responseQueue = on ? new LinkedBlockingQueue<Response>() : null;
 			}
 		}
 		
-		private boolean responseQueueEnabled() {
+		private boolean EnabledResponseQueue() {
 			return responseQueue != null;
 		}
 
@@ -233,10 +233,10 @@ public class Request extends MessageFormat {
 		 * 
 		 * @param response The response to handle
 		 */
-		public void responseHandel(Response response) {
+		public void responseHandle(Response response) {
 
 			// add the response
-			if (responseQueueEnabled()) {
+			if (EnabledResponseQueue()) {
 				if (!responseQueue.offer(response)) {
 					System.out.println("ERROR: Failed to add response to request");
 				}

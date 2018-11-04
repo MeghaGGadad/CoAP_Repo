@@ -50,9 +50,9 @@ public class Options {
 		 * 
 		 * @return A new option with a given number based on a integer value
 		 */
-		public Options (int val, int nr) {
-			setIntegerVal(val);
-			setOptionNum(nr);
+		public Options (int value, int num) {
+			setIntegerVal(value);
+			setOptionNum(num);
 		}
 		
 		/*
@@ -144,10 +144,10 @@ public class Options {
 			return CoAPOptionRegistry.toString(optionNum);
 		}
 
-		public Object getDisplayVal() {
+		//public Object getDisplayVal() {
 			// TODO Auto-generated method stub
-			return null;
-		}
+			//return null;
+		//}
 
 		/*This method returns the length of the option's data in the ByteBuffer
 		 *

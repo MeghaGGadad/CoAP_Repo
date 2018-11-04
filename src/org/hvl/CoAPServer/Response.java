@@ -44,7 +44,7 @@ public class Response extends MessageFormat {
 		}
 	}
 	
-	public int getTime() {
+	public int getRoundTripTime() {
 		if (request != null) {
 			return (int)(getTimestamp() - request.getTimestamp());
 		} else {
@@ -54,7 +54,7 @@ public class Response extends MessageFormat {
 	
 	public void handle() {
 		if (request != null) {
-			request.responseHandel(this);
+			request.responseHandle(this);
 		}
 	}
 	
@@ -83,7 +83,7 @@ public class Response extends MessageFormat {
 	
 	private Response response;
 	public String getResponseText() {
-		return response.getPayloadString();
+		return response.getPayloadAsString();
 	}
 
 }

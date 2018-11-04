@@ -36,7 +36,7 @@ public class ClientNON {
 	       if(IPAddress.isReachable(3000) && testinet.isReachable(3000))
             {		
 				 Request request=new Request(Code.GETRequest);
-				 request.ResponseQueueEnable(true);
+				 request.EnableResponseQueue(true);
   		         //request.setURI("coap://example.com:5683/sensors/temperature/large-update?mode=on");
 				 request.setURI("coap://example.com:5683/sensors/temperature/");
   		     	 
@@ -48,7 +48,7 @@ public class ClientNON {
 	         System.out.println("YOU REQUESTED FOR GET Request-1 METHOD");
 	         if(response != null)
   		     {
-	              System.out.println(response.getPayloadString());
+	              System.out.println(response.getPayloadAsString());
 			      Thread.sleep(5000);
              }
 			 else

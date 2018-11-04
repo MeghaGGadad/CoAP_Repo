@@ -21,7 +21,7 @@ public class DetailPrint {
 	        StringBuilder sd = new StringBuilder();
 	        
 	        sd.append("Request Details-------------------------\n");
-	        sd.append(String.format("MID    : %d\n", r.getID()));
+	        sd.append(String.format("MID    : %d\n", r.getMID()));
 	        sd.append(String.format("Token  : %s\n", r.getToken()));
 	        sd.append(String.format("Type   : %s\n", r.getType().toString()));
 	        //sb.append(String.format("Method : %s\n", r.getCode().toString()));
@@ -30,7 +30,7 @@ public class DetailPrint {
 	        if (r.getpayloadSize() > 0 && MediaTypeRegistery.isPrintable(r.getOptions().getContentFormat())) {
 	        
 	        	sd.append("---------------------------------------------------------------");
-	        	sd.append(r.getPayloadString());
+	        	sd.append(r.getPayloadAsString());
 	        }
 	        sd.append("-----------------------------------------------");
 	
@@ -49,7 +49,7 @@ public class DetailPrint {
 	        StringBuilder sd = new StringBuilder();
 	        
 	        sd.append("Response Details ---------------------\n");
-	        sd.append(String.format("MID    : %d\n", r.getID()));
+	        sd.append(String.format("MID    : %d\n", r.getMID()));
 	        sd.append(String.format("Token  : %s\n", r.getToken()));
 	        sd.append(String.format("Type   : %s\n", r.getType().toString()));
 	        //sb.append(String.format("Status : %s\n", r.getCode().toString()));
@@ -57,7 +57,7 @@ public class DetailPrint {
 	        sd.append(String.format("Payload: %d Bytes\n", r.getpayloadSize()));
 	        if (r.getpayloadSize() > 0 && MediaTypeRegistery.isPrintable(r.getOptions().getContentFormat())) {
 	        	sd.append("---------------------------------------------------------------\n");
-	        	sd.append(r.getPayloadString());
+	        	sd.append(r.getPayloadAsString());
 	        	sd.append("\n");
 	        }
 	        sd.append("-----------------------------------------------------");
