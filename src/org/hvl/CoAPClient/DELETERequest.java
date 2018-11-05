@@ -7,6 +7,6 @@ public class DELETERequest extends Request{
     	super(CoAPCodeRegistries.DELETE, true);
     }
     public void execute(HandleRequest handle) {
-		handle.performDELETE(this);
+		handle.performDELETEMethod(this);
 	}
 }

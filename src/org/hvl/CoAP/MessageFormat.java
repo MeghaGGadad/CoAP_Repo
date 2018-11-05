@@ -63,7 +63,7 @@ public class MessageFormat {
 	
 	//The message's ID
 	
-	private int MID;
+	private int MID = 59723;
 	
 	/** options of this message*/
 	protected CoAPOptionRegistry options;
@@ -175,7 +175,7 @@ public class MessageFormat {
 		if (opt != null) {
 			List<Options> options = new ArrayList<Options>();
 			options.add(opt);
-			setOptions(opt.getOptionNum(), options);
+			setOptions(opt.getOptionsNum(), options);
 		}
 	}
 	
@@ -229,10 +229,10 @@ public class MessageFormat {
       
       public void addOption(Options opt) {
   		
-  		List<Options> list = optionMap.get(opt.getOptionNum());
+  		List<Options> list = optionMap.get(opt.getOptionsNum());
   		if (list == null) {
   			list = new ArrayList<Options>();
-  			optionMap.put(opt.getOptionNum(), list);
+  			optionMap.put(opt.getOptionsNum(), list);
   		}
   		list.add(opt);
   	}	
@@ -457,7 +457,7 @@ public class MessageFormat {
 	 * @return True if the message is a request
 	 */
 	public boolean isRequest() {
-		return CoAPCodeRegistries.isRequest(code);
+		return CoAPCodeRegistries.isRequestCode(code);
 	}
 	
 	/*
@@ -466,7 +466,7 @@ public class MessageFormat {
 	 * @return True if the message is a response
 	 */
 	public boolean isResponse() {
-		return CoAPCodeRegistries.isResponse(code);
+		return CoAPCodeRegistries.isResponseCode(code);
 	}
     
 	public boolean isConfirmable() {

@@ -60,10 +60,10 @@ public class Request extends MessageFormat {
 	 * @param code The method code of the message
 	 * @param confirmable True if the request is to be sent as a CON
 	 */ 
-		public Request(int code, boolean confirmable) {
+		public Request(int codeval, boolean Confirmable) {
 			
-			super(confirmable ? 
-				Type.CON : Type.NON, code);
+			super(Confirmable ? 
+				Type.CON : Type.NON, codeval);
 		     
 		}
 		
@@ -155,21 +155,21 @@ public class Request extends MessageFormat {
 		public Response responseReceive() throws InterruptedException {
 			
 			// queue needed to perform this operation
-			if (!EnabledResponseQueue()) {
+			if (!EnabledRQueue()) {
 				System.out.println("WARNING: Responses may be lost, because of  Missing useResponseQueue(true) call, ");
-				EnableResponseQueue(true);
+				EnableRQueue(true);
 			}
 			
 			// receive response from a response queue
-			Response response = responseQueue.take();
+			Response res = responseQueue.take();
 			
 			// return back null if request timed out
-			return response != TIMEOUT_RESPONSE ? response : null; 
+			return res != TIMEOUT_RESPONSE ? res : null; 
 		}
 		
 		@Override
 		public void timedOut() {
-			if (EnabledResponseQueue()) {
+			if (EnabledRQueue()) {
 				responseQueue.offer(TIMEOUT_RESPONSE);
 			}
 		}
@@ -214,13 +214,13 @@ public class Request extends MessageFormat {
 		 * @param enable True to make enable and false to disable the response queue,
 		 * respectively
 		 */
-		public void EnableResponseQueue(boolean on) {
-			if (on != EnabledResponseQueue()) {
+		public void EnableRQueue(boolean on) {
+			if (on != EnabledRQueue()) {
 				responseQueue = on ? new LinkedBlockingQueue<Response>() : null;
 			}
 		}
 		
-		private boolean EnabledResponseQueue() {
+		private boolean EnabledRQueue() {
 			return responseQueue != null;
 		}
 
@@ -236,7 +236,7 @@ public class Request extends MessageFormat {
 		public void responseHandle(Response response) {
 
 			// add the response
-			if (EnabledResponseQueue()) {
+			if (EnabledRQueue()) {
 				if (!responseQueue.offer(response)) {
 					System.out.println("ERROR: Failed to add response to request");
 				}

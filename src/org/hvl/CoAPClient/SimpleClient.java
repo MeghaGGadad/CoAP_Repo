@@ -14,7 +14,7 @@ public class SimpleClient {
 		private static final int URI_INDEX     = 1;
 		private static final int PAYLOAD_INDEX = 2;
 		
-		Response response = null;
+		
 		
 		/*
 		 * Main method of this SIMPLE client.
@@ -61,8 +61,8 @@ public class SimpleClient {
 				System.err.println("Method not specified");
 				return;
 			}
-			Request request = newRequest(method);
-			if (request == null) {
+			Request req = newRequestMethod(method);
+			if (req == null) {
 				System.err.println("Unknown method: " + method);
 				return;
 			}
@@ -70,40 +70,36 @@ public class SimpleClient {
 			if (uri == null) {
 				System.err.println("URI not specified");
 			}
-			try {
-				request.setURI(new URI(uri));
-			} catch (URISyntaxException e) {
-				System.err.println("Failed to parse URI: " + e.getMessage());
-				return;
-			}
+			req.setURI(uri);
+			//request.setURI(new URI(uri));
 		    System.out.println("Request sent...");
-			request.setPayloadString(payload);
+			req.setPayloadString(payload);
 		   // enable response queue in order to use blocking I/O
-			request.EnableResponseQueue(true);
+			req.EnableRQueue(true);
 			
-			request.send();
+			req.send();
 			
 		    // loop for receiving multiple response 
 				
 				//Request request = newRequest(method);
 				
 				System.out.println("Receiving response...");
-				Response response = null;
+				Response res = null;
 				//response.Printlog();
-				System.out.println("Received message: " + request.getNewID() + " Message Type: " + request.getType());
-				System.out.println("Response recived..."+request.responseReceive());
+				System.out.println("Received Message: MID " + req.getNewID() + " Message Type: " + req.getType());
+				System.out.println("Response recived..."+req.responseReceive());
 				
 				
 				try {
-					response = request.responseReceive();
+					res = req.responseReceive();
 					
 					
 					// check for indirect response
-					if (response != null && response.isEmptyACK()) {
-						response.Printlog();
+					if (res != null && res.isEmptyAcknowldegement()) {
+						res.Printlog();
 						System.out.println("Request acknowledged, waiting for separate response...");
 						
-						response = request.responseReceive();
+						res = req.responseReceive();
 					}
 					
 					
@@ -115,10 +111,10 @@ public class SimpleClient {
 				
 				// to output the response
 				
-				if (response != null) {
+				if (res != null) {
 					
-					response.Printlog();
-					System.out.println("Total Time (ms): " + response.getRoundTripTime());
+					res.Printlog();
+					System.out.println("Total Time (ms): " + res.getRoundTripTime());
 					
 				}
 				
@@ -127,11 +123,11 @@ public class SimpleClient {
 				else {
 					
 					// no response received
-					// calculate time elapsed 
-					long elapsed = System.currentTimeMillis() - request.getTimestamp();
+					// calculate request timeout 
+					long requestTimeout = System.currentTimeMillis() - req.getTimestamp();
 					
-					System.out.println("Request timed out (ms): " + elapsed);
-					//break;
+					System.out.println("Request timed out (ms): " + requestTimeout);
+					
 				}
 				
 		    }
@@ -160,7 +156,7 @@ public class SimpleClient {
 		 * 
 		 * @return A new request object depending on method passed, or null if method not correct
 		 */
-		private static Request newRequest(String method) {
+		private static Request newRequestMethod(String method) {
 			if (method.equals("GET")) {
 				return new GETRequest();
 			} else if (method.equals("POST")) {

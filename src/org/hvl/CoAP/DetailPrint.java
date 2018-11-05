@@ -27,7 +27,7 @@ public class DetailPrint {
 	        //sb.append(String.format("Method : %s\n", r.getCode().toString()));
 	        //sd.append(String.format("Options: %s\n", r.getOptions(0).toString()));
 	        sd.append(String.format("Payload: %d Bytes\n", r.getpayloadSize()));
-	        if (r.getpayloadSize() > 0 && MediaTypeRegistery.isPrintable(r.getOptions().getContentFormat())) {
+	        if (r.getpayloadSize() > 0 && MediaTypeRegistery.printableMediaType(r.getOptions().getContentFormat())) {
 	        
 	        	sd.append("---------------------------------------------------------------");
 	        	sd.append(r.getPayloadAsString());
@@ -55,7 +55,7 @@ public class DetailPrint {
 	        //sb.append(String.format("Status : %s\n", r.getCode().toString()));
 	        sd.append(String.format("Options: %s\n", r.getOptions().toString()));
 	        sd.append(String.format("Payload: %d Bytes\n", r.getpayloadSize()));
-	        if (r.getpayloadSize() > 0 && MediaTypeRegistery.isPrintable(r.getOptions().getContentFormat())) {
+	        if (r.getpayloadSize() > 0 && MediaTypeRegistery.printableMediaType(r.getOptions().getContentFormat())) {
 	        	sd.append("---------------------------------------------------------------\n");
 	        	sd.append(r.getPayloadAsString());
 	        	sd.append("\n");

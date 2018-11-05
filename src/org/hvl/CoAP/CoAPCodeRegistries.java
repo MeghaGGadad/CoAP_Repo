@@ -62,19 +62,19 @@ public class CoAPCodeRegistries {
 	public static final int RESP_OK = 80;
 	
 	//Checks whether a code indicates a request (see Section 12.1.1) 
-	public static boolean isRequest(int code) {
+	public static boolean isRequestCode(int code) {
 		return (code >= 1) && (code <= 31);
 	}
 	
     //code indicates a response Section 12.1.2
-	public static boolean isResponse(int code) {
+	public static boolean isResponseCode(int code) {
 		return (code >= 40) && (code <= 242);
 		 
 	}
 	
 	//to check whether a code is valid
-	public static boolean isValidCode(int code) {
-		return (code >= 0) && (code <= 255);
+	public static boolean isValidCode(int codeval) {
+		return (codeval >= 0) && (codeval <= 255);
 		
 	}
 	
@@ -312,9 +312,9 @@ public class CoAPCodeRegistries {
 						
 			if (isValidCode(code)) {
 						
-						if (isRequest(code)) {
+						if (isRequestCode(code)) {
 							return String.format("Request Unknown [code %d]", code);
-						} else if (isResponse(code)) {
+						} else if (isResponseCode(code)) {
 							return String.format("Response Unknown[code %d]", code);
 						} else {
 							return String.format("Reserved for Future Use [code %d]", code);

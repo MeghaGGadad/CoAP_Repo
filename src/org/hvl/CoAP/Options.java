@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 public class Options {
     
 	//The current option's number
-		private int optionNum;
+		private int optNum;
 		
    //The current option's data
 		private ByteBuffer buf;
@@ -25,7 +25,7 @@ public class Options {
 		 */
 		public Options (byte[] random, int num) {
 			setValue(random);
-			setOptionNum(num);
+			setOptionsNum(num);
 		}
 		
 		/*
@@ -38,7 +38,7 @@ public class Options {
 		 */
 		public Options (String str, int nr) {
 			setStringVal(str);
-			setOptionNum(nr);
+			setOptionsNum(nr);
 		}
 		
 		/*
@@ -52,7 +52,7 @@ public class Options {
 		 */
 		public Options (int value, int num) {
 			setIntegerVal(value);
-			setOptionNum(num);
+			setOptionsNum(num);
 		}
 		
 		/*
@@ -69,8 +69,8 @@ public class Options {
 		 * 
 		 * @param nr The option number.
 		 */
-		public void setOptionNum (int num) {
-			optionNum = num;
+		public void setOptionsNum (int num) {
+			optNum = num;
 		}
 		
 		/*
@@ -131,8 +131,8 @@ public class Options {
 		}
 		
 		
-		public int getOptionNum() {
-		return optionNum;
+		public int getOptionsNum() {
+		return optNum;
 	}
 		
 		/*
@@ -141,13 +141,10 @@ public class Options {
 		 * @return The name of the option
 		 */
 		public String getName() {
-			return CoAPOptionRegistry.toString(optionNum);
+			return CoAPOptionRegistry.toString(optNum);
 		}
 
-		//public Object getDisplayVal() {
-			// TODO Auto-generated method stub
-			//return null;
-		//}
+		
 
 		/*This method returns the length of the option's data in the ByteBuffer
 		 *

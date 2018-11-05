@@ -36,7 +36,7 @@ public class ClientNON {
 	       if(IPAddress.isReachable(3000) && testinet.isReachable(3000))
             {		
 				 Request request=new Request(Code.GETRequest);
-				 request.EnableResponseQueue(true);
+				 request.EnableRQueue(true);
   		         //request.setURI("coap://example.com:5683/sensors/temperature/large-update?mode=on");
 				 request.setURI("coap://example.com:5683/sensors/temperature/");
   		     	 

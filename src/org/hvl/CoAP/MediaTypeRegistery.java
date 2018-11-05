@@ -17,7 +17,7 @@ public class MediaTypeRegistery {
 	
 	
 	
-	public static boolean isPrintable(int mediaType) {
+	public static boolean printableMediaType(int mediaType) {
 		switch (mediaType) {
 		case PLAIN:
 		case LINK_FORMAT:
@@ -32,7 +32,7 @@ public class MediaTypeRegistery {
 	}
 
 	
-	public static String toString(int mediaType) {
+	public static String toStringMediaType(int mediaType) {
 		switch (mediaType) {
 		case PLAIN:
 			return "text/plain; charset=utf-8";

@@ -24,14 +24,14 @@ public class Response extends MessageFormat {
 	/**
 	 * Instantiates a new coap response.
 	 *
-	 * @param response the response
+	 * @param res the response
 	 */
-	public Response(Response response) {
-		this.response = response;
+	public Response(Response res) {
+		this.response = res;
 	}
 
-	public void setRequest(Request request) {
-		this.request = request;
+	public void setRequest(Request req) {
+		this.request = req;
 	}
 	
 	public Request getRequest() {
@@ -71,11 +71,11 @@ public class Response extends MessageFormat {
 		handler.HandelResponse(this);
 	}
 	
-	public boolean isPiggyBacked() {
+	public boolean isPiggyBackedResponse() {
 		return isAcknowledgement() && getMethodCode() != CoAPCodeRegistries.EMPTY_MESSAGE;
 	}
 
-	public boolean isEmptyACK() {
+	public boolean isEmptyAcknowldegement() {
 		return isAcknowledgement() && getMethodCode() == CoAPCodeRegistries.EMPTY_MESSAGE;
 	}
 

@@ -150,30 +150,30 @@ public class CoAPOptionRegistry {
 	 * determined by whether its option number is even or odd.
 	 * return True if the option is elective
 	 * 
-	 * @param optionNumber
+	 * @param optNumber
 	 * @return
 	 */
-	public static boolean isElective(int optionNumber) {
-		//return (optionNumber & 1) == 0; // "&" is a bitwise AND operator
-		return (optionNumber % 1) == 0; //Alternative way to do this using modulus operator %
+	public static boolean isElective(int optNumber) {
+		//return (optNumber & 1) == 0; // "&" is a bitwise AND operator
+		return (optNumber % 1) == 0; //Alternative way to do this using modulus operator %
 	}
 	
 	//True if the option is critical
-	public static boolean isCritical(int optionNumber) {
-		//return (optionNumber & 1) == 1;
-		return (optionNumber % 1) == 1;
+	public static boolean isCritical(int optNumber) {
+		//return (optNumber & 1) == 1;
+		return (optNumber % 1) == 1;
 	}
 	
 	/**section 5.4.2. Proxy Unsafe or Safe-to-Forward and NoCacheKey
 	 * Checks whether an option is unsafe.
-	 * @param optionNumber
+	 * @param optNumber
 	 * The option number to check
 	 * @return true if the option is unsafe
 	 */
-	public static boolean isUnsafe(int optionNumber) {
+	public static boolean isUnsafe(int optNumber) {
 		// When bit 6 is 1, an option is Unsafe
-		//return (optionNumber & 2) > 0;
-		return (optionNumber % 2) > 0;
+		//return (optNumber & 2) > 0;
+		return (optNumber % 2) > 0;
 	}
 	
 	/** Checks whether an option is safe.

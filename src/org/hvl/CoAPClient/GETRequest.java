@@ -12,7 +12,7 @@ public class GETRequest extends Request {
 	
 	
 	public void execute(HandleRequest handle) {
-		handle.performGET(this);
+		handle.performGETMethod(this);
 	}
 
 

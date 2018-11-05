@@ -26,7 +26,7 @@ public class SimpleServer implements Server{
         
     }
 
-	public Server onAccept(Request request) {
+	public Server onAccept(Request req) {
 		System.out.println("Accept connection...");
 		return this;
 	}

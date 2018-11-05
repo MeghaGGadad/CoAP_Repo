@@ -9,6 +9,6 @@ public class POSTRequest extends Request {
    }
     
    public void execute(HandleRequest handle) {
-		handle.performPOST(this);
+		handle.performPOSTMehod(this);
 	}
 }
