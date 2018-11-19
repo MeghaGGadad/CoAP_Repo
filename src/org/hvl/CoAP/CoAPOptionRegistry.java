@@ -155,7 +155,7 @@ public class CoAPOptionRegistry {
 	 */
 	public static boolean isElective(int optNumber) {
 		//return (optNumber & 1) == 0; // "&" is a bitwise AND operator
-		return (optNumber % 1) == 0; //Alternative way to do this using modulus operator %
+		return (optNumber % 1) == 0; //Alternative way to do this using modulus(Remainder) operator %
 	}
 	
 	//True if the option is critical
@@ -181,8 +181,8 @@ public class CoAPOptionRegistry {
 	 * The option number to check
 	 * @return true if the option is safe
 	 */
-	public static boolean isSafe(int optionNumber) {
-		return !isUnsafe(optionNumber);
+	public static boolean isSafe(int optNumber) {
+		return !isUnsafe(optNumber);
 	}
 	
 	/**
@@ -191,13 +191,13 @@ public class CoAPOptionRegistry {
 	 * The option number to check
 	 * @return true if the option is not a cache-key
 	 */
-	public static boolean isNoCacheKey(int optionNumber) {
+	public static boolean isNoCacheKey(int optNumber) {
 		/*
 		 * When an option is not Unsafe, it is not a Cache-Key (NoCacheKey) if
 		 * and only if bits 3-5 are all set to 1; all other bit combinations
 		 * mean that it is a Cache-Key(section 5.4.6. Option Numbers)
 		 */
-		return (optionNumber & 0x1E) == 0x1C;
+		return (optNumber & 0x1E) == 0x1C;
 	}
 	
 	/**
@@ -206,8 +206,8 @@ public class CoAPOptionRegistry {
 	 * The option number to check
 	 * @return true if the option is a cache-key
 	 */
-	public static boolean isCacheKey(int optionNumber) {
-		return !isNoCacheKey(optionNumber);
+	public static boolean isCacheKey(int optNumber) {
+		return !isNoCacheKey(optNumber);
 	}
 	
 }

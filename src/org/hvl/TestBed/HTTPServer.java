@@ -9,8 +9,8 @@ public class HTTPServer {
 	private int portno;
 	private ServerSocket serverSocket;
 	
-	public HTTPServer(int portNumber) {
-		this.portno = portNumber;
+	public HTTPServer(int portNum) {
+		this.portno = portNum;
 	}
 
 	/**

@@ -15,11 +15,11 @@ public class BasicSocketHandler implements CoapSocketHandler{
 	
 	
 	
-	public BasicSocketHandler(ChannelManager channelManager) throws IOException {
-        this(channelManager, 9876);
+	public BasicSocketHandler(ChannelManager chManager) throws IOException {
+        this(chManager, 9876);
     }
    
-	public BasicSocketHandler(ChannelManager channelManager, int port) {
+	public BasicSocketHandler(ChannelManager chManager, int port) {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -44,8 +44,8 @@ public class BasicSocketHandler implements CoapSocketHandler{
 	}
 
 	@Override
-	public Channel connect(Client client, InetAddress remoteAddress, int remotePort) {
-		if (client == null){
+	public Channel connect(Client cli, InetAddress remoteAdd, int remotePort) {
+		if (cli == null){
 			return null;
 		}
     		
